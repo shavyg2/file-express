@@ -14,7 +14,7 @@ export class NodeFileExpress implements FileExpress{
 
 export class FileExpressRunner{
 
-    constructor(private directory:string,private options:Optional<FileExpressOptions,"paramType"|"ext">){
+    constructor(private directory:string,private options:Optional<FileExpressOptions,"ext">){
 
     }
 

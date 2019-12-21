@@ -23,5 +23,20 @@
   },
   "peerDependencies": {
     "express": "^4.17.1"
-  }
+  },
+  "name": "file-express",
+  "version": "1.0.0",
+  "main": "jest.config.js",
+  "directories": {
+    "example": "example",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }

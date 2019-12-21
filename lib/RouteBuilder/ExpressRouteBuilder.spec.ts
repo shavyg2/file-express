@@ -16,7 +16,6 @@ describe("Express Route Builder",()=>{
 
     let searcher = new DirectorySearcher({
         ext:[".ts",".js"],
-        paramType:ParamType.Brackets,
         basedir:"example"
     })
 

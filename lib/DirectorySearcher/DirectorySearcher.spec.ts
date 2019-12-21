@@ -8,7 +8,6 @@ describe("Directory Searcher",()=>{
 
     let searcher = new DirectorySearcher({
         ext:[".ts"],
-        paramType:ParamType.Brackets,
         basedir:"example"
     })
 
