@@ -27,8 +27,8 @@
   "version": "1.0.0",
   "main": "dist/lib/ExpressBootStap/ExpressBootstrap.js",
   "bin": {
-    "fe":"dist/bin/fe.js",
-    "file-express":"dist/bin/fe.js"
+    "fe": "dist/bin/fe.js",
+    "file-express": "dist/bin/fe.js"
   },
   "directories": {
     "example": "example",

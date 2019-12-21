@@ -6,8 +6,6 @@ import { ParamType } from "../lib/file-express/ParamType";
 import { AddressInfo } from "net";
 import cla from "command-line-args";
 
-
-
 const cli = cla([
     {
         name: "dir",
@@ -40,7 +38,9 @@ const cli = cla([
         type: Boolean,
         defaultValue: false
     }
-])
+],{
+
+})
 
 if (cli.help) {
     const commandLineUsage = require('command-line-usage')
