@@ -23,7 +23,7 @@
   "peerDependencies": {
     "express": "^4.17.1"
   },
-  "name": "file-express",
+  "name": "file-server-express",
   "version": "1.0.0",
   "main": "dist/lib/ExpressBootStap/ExpressBootstrap.js",
   "bin": {
