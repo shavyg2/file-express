@@ -1,5 +1,4 @@
-
-
+#!/usr/bin/env node
 
 import { ExpressBootstrap } from "../lib/ExpressBootStrap/ExpressBootstrap";
 import express from "express";

@@ -1,8 +1,6 @@
 {
   "dependencies": {
     "@sindresorhus/is": "^1.2.0",
-    "@slick-for/di": "^1.0.4",
-    "@types/jest": "^24.0.24",
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.1.0",
     "escape-string-regexp": "^2.0.0",
@@ -15,6 +13,7 @@
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",
     "@types/express": "^4.17.2",
+    "@types/jest": "^24.0.24",
     "@types/url-join": "^4.0.0",
     "express": "^4.17.1",
     "jest": "^24.9.0",
@@ -26,7 +25,11 @@
   },
   "name": "file-express",
   "version": "1.0.0",
-  "main": "jest.config.js",
+  "main": "dist/lib/ExpressBootStap/ExpressBootstrap.js",
+  "bin": {
+    "fe":"dist/bin/fe.js",
+    "file-express":"dist/bin/fe.js"
+  },
   "directories": {
     "example": "example",
     "lib": "lib",
@@ -36,7 +39,15 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Shavauhn Gabay",
   "license": "ISC",
-  "description": ""
+  "description": "Quickly boot up an express server using the file-system",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shavyg2/file-express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shavyg2/file-express/issues"
+  },
+  "homepage": "https://github.com/shavyg2/file-express#readme"
 }
