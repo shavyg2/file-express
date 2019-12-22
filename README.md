@@ -1,5 +1,9 @@
 ### File Express
 
+  **You must install the version of express to use globally as this package doesn't ship with express**
+  
+
+
   Create an api from the file system
 
 Options
