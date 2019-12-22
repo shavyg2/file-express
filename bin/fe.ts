@@ -5,6 +5,7 @@ import express from "express";
 import { ParamType } from "../lib/file-express/ParamType";
 import { AddressInfo } from "net";
 import cla from "command-line-args";
+import { FileExpressOptions } from "../lib/file-express/FileExpressOptions";
 
 const cli = cla([
     {
@@ -14,8 +15,20 @@ const cli = cla([
         defaultValue: ".",
     },
     {
+        name:"verbose",
+        alias:"v",
+        type:Boolean,
+        defaultValue:false
+    },
+    {
         name:"cors",
         alias:"c",
+        type:Boolean,
+        defaultValue:false
+    },
+    {
+        name:"live",
+        alias:"l",
         type:Boolean,
         defaultValue:false
     },
@@ -63,6 +76,12 @@ if (cli.help) {
                     name: 'dir',
                     typeLabel: '{underline Directory}',
                     description: 'The base directory to bootstrap api.',
+                    alias:"d"
+                },
+                {
+                    name:"live",
+                    typeLabel:'{underline Boolean}',
+                    description:"Enable hot reloading of function",
                     alias:"d"
                 },
                 {
@@ -116,10 +135,11 @@ if(cli.cors){
 app.use(cli.route, router);
 
 const boot = new ExpressBootstrap(router)
-const options = {
+const options:FileExpressOptions = {
     basedir: cli.dir,
     ext: cli.ext,
-    paramType: ParamType.Brackets
+    live:cli.live,
+    verbose:cli.verbose
 }
 boot.boot(options);
 
