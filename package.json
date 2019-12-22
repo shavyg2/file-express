@@ -1,14 +1,50 @@
 {
+  "name": "express-file-api",
+  "version": "1.0.1",
+  "description": "Quickly boot up an express server using the file-system",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shavyg2/file-express.git"
+  },
+  "bugs": {
+    "url": "https://github.com/shavyg2/file-express/issues"
+  },
+  "homepage": "https://github.com/shavyg2/file-express#readme",
+  "author": "Shavauhn Gabay",
+  "keywords": [
+    "express",
+    "file api",
+    "api",
+    "server"
+  ],
+  "bin": {
+    "fe": "dist/bin/fe.js",
+    "express-file-api": "dist/bin/fe.js"
+  },
+  "main": "dist/lib/ExpressBootStap/ExpressBootstrap.js",
+  "directories": {
+    "example": "example",
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "@sindresorhus/is": "^1.2.0",
     "command-line-args": "^5.1.1",
     "command-line-usage": "^6.1.0",
+    "cors": "^2.8.5",
     "escape-string-regexp": "^2.0.0",
     "lambda-method": "^1.0.7",
     "leven": "^3.1.0",
     "regex-parser": "^2.2.10",
     "url-join": "^4.0.1",
     "utility-types": "^3.10.0"
+  },
+  "peerDependencies": {
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",
@@ -19,35 +55,5 @@
     "jest": "^24.9.0",
     "ts-jest": "^24.2.0",
     "typescript": "^3.7.4"
-  },
-  "peerDependencies": {
-    "express": "^4.17.1"
-  },
-  "name": "express-file-api",
-  "version": "1.0.1",
-  "main": "dist/lib/ExpressBootStap/ExpressBootstrap.js",
-  "bin": {
-    "fe": "dist/bin/fe.js",
-    "file-express": "dist/bin/fe.js"
-  },
-  "directories": {
-    "example": "example",
-    "lib": "lib",
-    "test": "test"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "Shavauhn Gabay",
-  "license": "ISC",
-  "description": "Quickly boot up an express server using the file-system",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/shavyg2/file-express.git"
-  },
-  "bugs": {
-    "url": "https://github.com/shavyg2/file-express/issues"
-  },
-  "homepage": "https://github.com/shavyg2/file-express#readme"
+  }
 }

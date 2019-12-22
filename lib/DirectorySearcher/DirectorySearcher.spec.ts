@@ -1,5 +1,4 @@
 import { DirectorySearcher } from "./DirectorySearcher"
-import { ParamType } from "../file-express/ParamType"
 import is from "@sindresorhus/is";
 
 

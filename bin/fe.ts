@@ -14,6 +14,12 @@ const cli = cla([
         defaultValue: ".",
     },
     {
+        name:"cors",
+        alias:"c",
+        type:Boolean,
+        defaultValue:false
+    },
+    {
         name: "route",
         alias: "r",
         type: String,
@@ -60,6 +66,12 @@ if (cli.help) {
                     alias:"d"
                 },
                 {
+                    name:"cors",
+                    typeLabel:'{underline Boolean}',
+                    description:"Enable cors for all routes",
+                    alias:"c",
+                },
+                {
                     name: 'ext',
                     typeLabel: '{underline Extension}',
                     description: 'The extension for the files to use. This requires the {underline .} in the extension name',
@@ -94,6 +106,13 @@ if (cli.help) {
 const app = express();
 
 const router = express.Router();
+
+
+if(cli.cors){
+    const cors = require("cors");
+    router.use(cors());
+}
+
 app.use(cli.route, router);
 
 const boot = new ExpressBootstrap(router)
