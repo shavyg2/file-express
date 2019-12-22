@@ -24,7 +24,7 @@
     "express": "^4.17.1"
   },
   "name": "express-file-api",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/lib/ExpressBootStap/ExpressBootstrap.js",
   "bin": {
     "fe": "dist/bin/fe.js",
