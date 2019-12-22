@@ -1,10 +1,10 @@
 import api from "lambda-method";
+import { AppName } from "../_util/name";
 
 export default api.get((req,res)=>{
-
-    console.log(req.params);
     return {
         username:req.params.username,
-        "logic":false
+        AppName
+        
     }
 });

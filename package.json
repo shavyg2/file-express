@@ -39,7 +39,9 @@
     "escape-string-regexp": "^2.0.0",
     "lambda-method": "^1.0.7",
     "leven": "^3.1.0",
+    "pkg-up": "^3.1.0",
     "regex-parser": "^2.2.10",
+    "ts-node": "^8.5.4",
     "url-join": "^4.0.1",
     "utility-types": "^3.10.0"
   },
@@ -48,6 +50,8 @@
   },
   "devDependencies": {
     "@types/command-line-args": "^5.0.0",
+    "@types/command-line-usage": "^5.0.1",
+    "@types/cors": "^2.8.6",
     "@types/express": "^4.17.2",
     "@types/jest": "^24.0.24",
     "@types/url-join": "^4.0.0",

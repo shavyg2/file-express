@@ -2,6 +2,11 @@ import { FileExpressOptions } from "../file-express/FileExpressOptions";
 import { DirectorySearcher } from "../DirectorySearcher/DirectorySearcher";
 import { ExpressRouteBuilder, ExpressHandlerBuilder } from "../RouteBuilder/ExpressRouteBuilder";
 import express from "express";
+import pkg from "pkg-up";
+import { dirname } from "path";
+import strRegex from "regex-parser";
+import escape from "escape-string-regexp";
+
 
 
 
@@ -39,7 +44,12 @@ ${route.route}
                     }
 
                     if(options.live){
-                        delete require.cache[require.resolve(handle.required)];
+                        const dir = dirname(pkg.sync());
+                        Object.entries(require.cache).forEach(([key])=>{
+                            if(strRegex(escape(dir)).test(key) && !/node_modules/.test(key)){
+                                delete require.cache[key]
+                            }
+                        })
                     }
                })
            })

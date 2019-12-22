@@ -15,6 +15,12 @@ const cli = cla([
         defaultValue: ".",
     },
     {
+        name:"tsc",
+        alias:"t",
+        type:Boolean,
+        defaultValue:false,
+    },
+    {
         name:"verbose",
         alias:"v",
         type:Boolean,
@@ -120,6 +126,9 @@ if (cli.help) {
     process.exit(0);
 }
 
+if(cli.tsc){
+    require("ts-node/register");
+}
 
 
 const app = express();
