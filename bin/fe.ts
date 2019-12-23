@@ -6,6 +6,8 @@ import { ParamType } from "../lib/file-express/ParamType";
 import { AddressInfo } from "net";
 import cla from "command-line-args";
 import { FileExpressOptions } from "../lib/file-express/FileExpressOptions";
+import { routeJoin } from "../util/route-join";
+import bp from "body-parser"
 
 const cli = cla([
     {
@@ -127,6 +129,7 @@ if (cli.help) {
 }
 
 if(cli.tsc){
+    console.log("typescript support [x]")
     require("ts-node/register");
 }
 
@@ -136,15 +139,25 @@ const app = express();
 const router = express.Router();
 
 
+router.use(bp.json());
+router.use(bp.urlencoded({
+    extended: true
+  }));
+  
+
+
 if(cli.cors){
     const cors = require("cors");
     router.use(cors());
 }
 
-app.use(cli.route, router);
+
+
+app.use(routeJoin(cli.route), router);
 
 const boot = new ExpressBootstrap(router)
 const options:FileExpressOptions = {
+    route:cli.route,
     basedir: cli.dir,
     ext: cli.ext,
     live:cli.live,
