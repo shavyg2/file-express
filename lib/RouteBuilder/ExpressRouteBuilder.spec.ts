@@ -1,4 +1,4 @@
-import { DirectorySearcher } from "../DirectorySearcher/DirectorySearcher"
+import { DirectorySearcher } from "../Searcher/DirectorySearcher"
 import { ParamType } from "../file-express/ParamType"
 import { ExpressRouteBuilder, ExpressHandlerBuilder } from "./ExpressRouteBuilder"
 

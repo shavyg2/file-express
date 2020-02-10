@@ -17,12 +17,12 @@ export class DirectorySearcher {
     }
 
 
-    get isInBase(){
+    get isInBaseRegex(){
         return parser(`/^${escape(this.fullBase)}/`);
     }
+
     search(directory:string = this.options.basedir): DirectorySearchResult[] {
-        const fullBase = this.fullBase//resolve(this.options.basedir);
-        const isInBase = this.isInBase//parser(`/^${escape(fullBase)}/`);
+        const isInBaseRegex = this.isInBaseRegex//parser(`/^${escape(fullBase)}/`);
         const dir = readdirSync(directory);
         const directoryMap = dir.map(file => {
             switch (file) {
@@ -46,27 +46,37 @@ export class DirectorySearcher {
                     };
                     return result;
             }
-        }).filter(x => x).filter(x=>{
+        })
+        .filter(x => x)
+        .filter(x=>{
             const fullFile = resolve(x.filepath);
-            return isInBase.test(fullFile);
-        });
+            return isInBaseRegex.test(fullFile);
+        })
+
         const directoriesOnly = directoryMap.filter(x => {
             return x.isDirectory;
         });
+
+        const subdirFiles = directoriesOnly
+        .map(x => this.search(x.filepath))
+        .reduce((a, b) => {
+            return a.concat(b);
+        }, []);
+
+
         const filesOnly = directoryMap.filter(x => {
             return x.isFile;
         }).filter(x => {
             return this.options.ext.map(x => x.toLocaleLowerCase()).includes(x.ext.toLowerCase());
         });
-        const subdirFiles = directoriesOnly.map(x => this.search(x.filepath)).reduce((a, b) => {
-            return a.concat(b);
-        }, []);
         const files = filesOnly.concat(subdirFiles);
-
         return files;
     }
 
+
+
+
     private getRelativeRoutePath(filepath: string, ext: string) {
-        return resolve(filepath).replace(this.isInBase, "").replace(ext, "").replace(/\[([^\]]+)\]/g, ":$1").replace(/\\{1,2}/g, "/");
+        return resolve(filepath).replace(this.isInBaseRegex, "").replace(ext, "").replace(/\[([^\]]+)\]/g, ":$1").replace(/\\{1,2}/g, "/");
     }
 }

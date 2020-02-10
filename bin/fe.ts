@@ -6,7 +6,7 @@ import { ParamType } from "../lib/file-express/ParamType";
 import { AddressInfo } from "net";
 import cla from "command-line-args";
 import { FileExpressOptions } from "../lib/file-express/FileExpressOptions";
-import { routeJoin } from "../util/route-join";
+import { normalizeRoute } from "../util/route-join";
 import bp from "body-parser"
 
 const cli = cla([
@@ -153,7 +153,7 @@ if(cli.cors){
 
 
 
-app.use(routeJoin(cli.route), router);
+app.use(normalizeRoute(cli.route), router);
 
 const boot = new ExpressBootstrap(router)
 const options:FileExpressOptions = {

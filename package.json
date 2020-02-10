@@ -38,7 +38,7 @@
     "command-line-usage": "^6.1.0",
     "cors": "^2.8.5",
     "escape-string-regexp": "^2.0.0",
-    "lambda-method": "^1.0.7",
+    "lambda-method": "^1.0.8",
     "leven": "^3.1.0",
     "pkg-up": "^3.1.0",
     "regex-parser": "^2.2.10",

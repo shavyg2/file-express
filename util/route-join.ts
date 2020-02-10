@@ -1,7 +1,7 @@
 import join from "url-join"
 import path from "path";
 
-export function routeJoin(...routes:string[]){
+export function normalizeRoute(...routes:string[]){
 
     let url = join(...routes);
     if(path.isAbsolute(url)){

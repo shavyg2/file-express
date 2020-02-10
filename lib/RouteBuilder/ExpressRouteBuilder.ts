@@ -1,10 +1,9 @@
 import { FileExpressOptions } from "../file-express/FileExpressOptions";
-import { DirectorySearchResult } from "../DirectorySearcher/DirectorySearchResults";
+import { DirectorySearchResult } from "../Searcher/DirectorySearchResults";
 import { dirname, resolve } from "path";
 import leven from "leven";
-import express from "express";
 import join from "url-join";
-import strRegex from "regex-parser";
+import parser from "regex-parser";
 import escapeRegex from "escape-string-regexp";
 import { RouteConfig } from "./RouteConfig";
 import { RouterConfig } from "./RouterConfig";
@@ -18,28 +17,30 @@ export class ExpressRouteBuilder{
 
     }
 
+    getRoutes(searchResults:DirectorySearchResult[],store={} as {[key:string]:DirectorySearchResult[]}){
 
-
-    getRoutes(files:DirectorySearchResult[],store={} as {[key:string]:DirectorySearchResult[]}){
-        files.forEach(x=>{
-            let currentPath = x.relativePath;
+        searchResults.forEach(result=>{
+            let currentPath = result.relativePath;
             do{
                 const collections = store[currentPath] = store[currentPath] || [];
-                collections.push(x);
+                collections.push(result);
                 currentPath = dirname(currentPath);
             }while(currentPath!=="/")
         })
 
-        const list = Object.entries(store).filter(x=>!x[0].match(strRegex(`/${escapeRegex(":")}[A-z0-9]/i`)));
-        const sortedList = list.sort(([k1,v1],[k2,v2])=>{
+        const routeWithoutParams = Object.entries(store)
+        .filter(([route,config])=>!route.match(parser(`/${escapeRegex(":")}[A-z0-9]/i`)));
+
+
+        const routeWithoutParamsSorted = routeWithoutParams.sort(([k1,v1],[k2,v2])=>{
             return leven(k1,k2)
-        }) || list;
+        }) || routeWithoutParams;
 
 
 
-        sortedList.forEach(([key,routeContainer],index1)=>{
+        routeWithoutParamsSorted.forEach(([key,routeContainer],index1)=>{
             
-            sortedList.forEach(([key2,routeContainer2],index2)=>{
+            routeWithoutParamsSorted.forEach(([key2,routeContainer2],index2)=>{
 
                 if(index1===index2){
                     return;
@@ -48,18 +49,20 @@ export class ExpressRouteBuilder{
                 const copy1 = routeContainer.slice(0);
                 const copy2 = routeContainer2.slice(0);
 
-                copy1.forEach((x,index)=>{
+                copy1.forEach((routeConfig,index)=>{
                     
-                    if(routeContainer2.indexOf(x)==-1){
+                    if(routeContainer2.indexOf(routeConfig)==-1){
                         return;
                     }
+                    
                     const furtherDown = index1<index2;
                     const betterPlacement = copy2.length > copy1.length;
 
+                    //ensure route config is only located in one optimal path
                     if(furtherDown && betterPlacement){
-                        routeContainer.splice(routeContainer.indexOf(x),1);
+                        routeContainer.splice(routeContainer.indexOf(routeConfig),1);
                     }else{
-                        routeContainer2.splice(routeContainer2.indexOf(x),1)
+                        routeContainer2.splice(routeContainer2.indexOf(routeConfig),1)
                     }
                 })
                 
@@ -67,7 +70,7 @@ export class ExpressRouteBuilder{
         })
 
 
-        return sortedList.reduce((a,[key,value])=>{
+        return routeWithoutParamsSorted.reduce((a,[key,value])=>{
             if(value.length>0){
                 return Object.assign(a,{[key]:value});
             }else{
@@ -83,7 +86,7 @@ export class ExpressHandlerBuilder{
         const appSettings = Object.entries(routes).map(([route,routeOptions]):RouterConfig=>{
             
             const config = routeOptions.map((option):RouteConfig=>{
-                const path = join("/",option.relativePath.replace(strRegex(`/^${escapeRegex(route)}/`),"")) || "/";
+                const path = join("/",option.relativePath.replace(parser(`/^${escapeRegex(route)}/`),"")) || "/";
                 const filepath = option.filepath;
                 return {
                     path,
