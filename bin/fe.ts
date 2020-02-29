@@ -170,3 +170,9 @@ const server = app.listen(process.env.PORT || cli.port, () => {
     const address = server.address() as AddressInfo;
     console.log(`[${options.basedir}]:${address.port}`)
 });
+
+process.on("SIGTERM",()=>{
+    server.close(()=>{
+        process.exit(0);
+    })
+})
