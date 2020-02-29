@@ -19,8 +19,8 @@
     "server"
   ],
   "bin": {
-    "fe": "dist/bin/fe.js",
-    "express-file-api": "dist/bin/fe.js"
+    "express-file-api": "dist/bin/fe.js",
+    "fe": "dist/bin/fe.js"
   },
   "main": "dist/lib/ExpressBootStap/ExpressBootstrap.js",
   "directories": {
@@ -29,7 +29,8 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "build":"tsc"
   },
   "dependencies": {
     "@sindresorhus/is": "^1.2.0",
