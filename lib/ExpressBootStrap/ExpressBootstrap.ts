@@ -78,7 +78,11 @@ export class ExpressBootstrap {
 
                 router.all(normalizeRoute(handle.path), (req, res, next) => {
                     const handler = require(handle.required);
-                    const handlerName = Object.keys(handler)[0]
+                    const availableHandlers = Object.keys(handler)
+                    const handlerName = availableHandlers.filter(name=>{
+                        return typeof handler[name] ==="function"
+                    })[0]
+                    console.log("handler name",handlerName)
                     if (handler[handlerName]) {
                         if (options.verbose) {
                             logRouteInfo(routeHandles, handle, handlerName);
